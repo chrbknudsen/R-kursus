@@ -1,0 +1,431 @@
+R-kursus - introduktion
+========================================================
+author: Christian Knudsen
+date: 
+autosize: true
+
+En introduktion til R
+========================================================
+
+For begyndere
+
+- Hvem er vi?
+- Hvad er R?
+- Miljøet
+- Variable
+- Datatyper
+- Operatorer
+- Funktioner
+- Løkker og strukturer
+- Biblioteker
+- Scripts
+- Visualisering
+
+
+Hvem er vi?
+==============================
+Datalab!
+
+- [Humlab]
+- DSSL (Digital Social Science Lab)
+- Datalab (det ligger på Nord)
+
+Software, hardware og praktisk hjælp til indsamling, analyse og visualisering af data.
+
+Kontakt os på datalab-nord@kb.dk.
+
+Man kan dog undre sig over at den her ikke dukker op i git-fanen.
+
+Hvad er R?
+==================
+Open source programmeringssprog designet til statistiske beregninger og datavisualiseringer.
+
+Kommandoliniebaseret - med mulighed for grafiske brugerflader
+
+***
+
+Øvelser?
+
+- Åben Rstudio
+- Tast med på eksemplerne
+- Spørg!
+
+
+Miljøet
+================
+- RStudio
+- Scripts
+- Konsol
+
+***
+
+![alt text](rstudio.png)
+
+<!--
+R er et sprog hvor vi giver det en kommando, og får et svar. I kan se det i konsollen. Jeg har skrevet 2 + 2, og trykket enter.
+Svaret er: 4
+Man kan gemme scripts, så man ikke skal taste det hele ind hver gang. 
+-->
+
+Variable
+===================================
+```{r}
+a <- 2
+b <- 2
+a + b
+```
+
+
+Datatyper
+========================================================
+- Logical
+- Numeric
+- Integer
+- Complex
+- Character
+- Raw
+
+***
+
+- TRUE/FALSE
+- Tal: 3,141
+- Heltal: -1, 0, 1, 2
+- Komplekse tal: 3 + 2i
+- Tekst: "Hej verden!"
+- Raw: Rå bytes
+
+
+
+Objekter
+========================================================
+- Vectors
+- Lists
+- Matrices
+- Arrays
+- Factors
+- Data Frames
+
+
+Vektorer
+================
+Samling af elementer af samme type
+
+```{r}
+æble <- c('rød', 'grøn', 'gul')
+print(æble)
+æble[1]
+```
+
+Vektorer 2
+=========================
+Mange funktioner (det ser vi på senere), håndterer vektorer rigtig godt!
+
+```{r}
+a <- c(1,2,3,4)
+a
+b <- a + 1
+b
+c <- a + a[2]
+c
+```
+
+
+Lister
+=================
+Et objekt der kan indeholde elementer af forskellig type
+```{r}
+liste <- list(c(1,2,3), 42.47, "Hej")
+liste
+```
+```{r}
+liste[2]
+```
+<!--
+Bemærk det der [[1]]. 
+-->
+
+
+Matrices
+=================
+Et to-dimensionelt, rektangulært datasæt.
+```{r}
+linie1 <- c(1, 2, 3, 4, 5, "d")
+matrice <- matrix(linie1, nrow=2, ncol=3,  byrow=TRUE)
+matrice
+```
+```{r}
+matrice[1,]
+```
+```{r}
+matrice[,1]
+```
+```{r}
+matrice[2,1]
+```
+
+Arrays
+====================
+Basalt set matricer i flere end to dimensioner
+```{r}
+a <- array(c('a','b'),dim = c(3,3,2))
+print(a)
+```
+
+***
+
+```{r}
+a[1,2,2]
+```
+
+```{r}
+a[2,2,2]
+```
+
+
+Factors
+=======================
+- Håndterer kategoriske variable. 
+- Variable der kan have et begrænset antal værdier.
+-Ofte kvalitative.
+- Eksempel: Bibliotekets brugerundersøgelse spørger til foretrukkent fysisk bibliotek
+- Svarmuligheder: KUB-Nord, KUB-Frederiksberg, KUB-Samf (kun det første svar er rigtigt)
+- Mange statistiske metoder "ved" hvordan kategoriske variable skal behandles. Men kun hvis de "ved" at det er kategoriske variable.
+
+***
+
+```{r}
+svar <- c('Nord', 'Nord', 'Samf', 'Frb', 'Nord')
+svar_faktor <- factor(svar)
+print(svar_faktor)
+table(svar_faktor)
+```
+
+<!---
+Det er også en effektiv måde at gemme data. Der bliver gemt en vektor med "levels", og en anden med numeriske værdier
+for de levels. Det fylder mindre.
+-->
+
+
+Data Frames
+====================
+Teknisk en liste af vektorer med samme længde
+
+MEGET brugt
+
+```{r}
+navn <- c('Mazda', 'Datsun', 'Mercedes')
+heste <- c(110, 93, 95)
+gear <- c(4, 4, 4)
+biler <- data.frame(navn, heste, gear)
+
+print(biler)
+```
+
+***
+
+```{r}
+biler$heste
+biler$navn[1]
+biler[2]
+```
+
+
+Operatorer
+=======================
+- De fire regnearter: +,-,/,*
+- Relationer: <, >, ==, <=, >=, !=
+- Logiske: &, |, !
+- Assignment: <-, <<-, =, ->
+- Diverse: :, %in%
+
+***
+
+- De virker stort set alle på vektorer:
+```{r}
+a <- c(1,2,3,4)
+a+2
+a/2
+a*2
+a==2
+```
+
+Flere operatorer
+=====================
+
+```{r}
+1 < 2
+1 > 2
+1 %in% c(1,2,3,4)
+5 %in% c(1,2,3,4)
+```
+
+
+
+Funktioner
+=====================
+- Dem har vi brugt en del af allerede
+- Hvis det virker uoverskueligt - betragt dem som en sort kasse. Noget hældes ind, noget andet kommer ud.
+
+- Altid på formen: funktionsnavn(input) - og giver noget output.
+
+- I tvivl? ?funktionsnavn
+- Panisk? ??funktionsnavn
+
+*** 
+
+```{r}
+max(biler$heste)
+mean(biler$heste)
+```
+
+
+Din egen funktion
+===============================
+
+Man kan lave sine egne:
+```{r}
+minfunktion <- function(a){
+  resultat <- a*6
+  return(resultat)
+}
+```
+
+***
+
+```{r}
+minfunktion(7)
+
+minfunktion(7)+5
+```
+
+
+
+Løkker og strukturer
+==========================
+- Ofte har vi behov for at gøre det samme igen og igen
+- Men måske på forskelligt data.
+- Løkker!
+
+"for" løkken.
+for hvert element "i" i en eller anden sekvens gør følgende
+
+```{r}
+1:10
+```
+
+
+***
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
+
+While-løkken
+=======================
+så længe en eller anden betingelse er opfyldt, gør følgende
+
+Den nysgerrige studerende kan selv skrive ?break og ?next i konsollen. De er nyttige, men vi skal videre!
+
+***
+
+```{r}
+i <- 0
+while(i < 10){
+  print(i)
+  i <- i + 1
+}
+```
+
+
+Biblioteker
+==========================
+Man kan skrive sine egne funktioner. Man kan også kopiere andres.
+
+Den slags distribueres i biblioteker. Dem kan man installere, indlæse og bruge.
+
+- dplyr: subsetting og sammenhæftning af datasæt. Og meget andet
+- tidyr: ændrer layoot af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
+- stringr: kraftfulde værktøjer til manipulation af tekst
+- lubridate: håndtering af datoer og tid
+- xlsx: gør det let at importere Excel filer
+
+- og mange andre. Flere tusinde!
+
+***
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+library(xlsx)
+```
+
+
+
+Visualisering
+============================
+- Det var alt det kedelige
+- Der er nødvendigt for at lave interessante ting
+
+R er født med nogle datasæt man kan lege med:
+
+```{r}
+head(mtcars)
+```
+
+
+Hvad var det?
+=====================
+- Biler.
+- Hvor langt de kører på literen (eller miles pr gallon)
+- Hvor mange cylindre de har
+- Hvad deres slagvolumen er
+- Hvor mange hestekræfter de har
+- Deres "rear axle ratio"
+- Deres vægt
+
+***
+
+- Hvor hurtigt de accelerer til en kvart mil
+- type af motor (noget med hvordan cylindrene er placeret i forhold til hinanden)
+- Om de har automatgear eller manuelt
+- Hvor mange gear de har (udover bakgear)
+- Antal karburatorer
+
+Alt sådan noget som min mand finder meget interessant, og som jeg er ligeglad med.
+
+Men det er data, og vi kan visualisere det!
+
+Plot
+=======================
+Den indbyggede funktion til det hedder plot()
+
+Prøv at skrive ?plot i konsollen
+
+Plot vil godt have x og y - og en type, så den ved om vi vil plotte punkter eller linier
+
+Og den kan meget andet.
+
+Vi plotter brændstoføkonomi mod antallet af hestekræfter.
+
+Og beder om punkter
+
+
+
+***
+
+```{r}
+plot(mtcars$mpg, mtcars$hp, type="p")
+```
+
+Man kan meget mere
+==================================
+```{r, eval=FALSE}
+plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", ylab="Heste")
+```
+
+***
+
+```{r, echo=FALSE}
+plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", ylab="Heste")
+```
