@@ -67,10 +67,15 @@ Man kan gemme scripts, så man ikke skal taste det hele ind hver gang.
 
 Variable
 ===================================
-```{r}
+
+```r
 a <- 2
 b <- 2
 a + b
+```
+
+```
+[1] 4
 ```
 
 
@@ -108,35 +113,84 @@ Vektorer
 ================
 Samling af elementer af samme type
 
-```{r}
+
+```r
 æble <- c('rød', 'grøn', 'gul')
 print(æble)
+```
+
+```
+[1] "rød"  "grøn" "gul" 
+```
+
+```r
 æble[1]
+```
+
+```
+[1] "rød"
 ```
 
 Vektorer 2
 =========================
 Mange funktioner (det ser vi på senere), håndterer vektorer rigtig godt!
 
-```{r}
+
+```r
 a <- c(1,2,3,4)
 a
+```
+
+```
+[1] 1 2 3 4
+```
+
+```r
 b <- a + 1
 b
+```
+
+```
+[1] 2 3 4 5
+```
+
+```r
 c <- a + a[2]
 c
+```
+
+```
+[1] 3 4 5 6
 ```
 
 
 Lister
 =================
 Et objekt der kan indeholde elementer af forskellig type
-```{r}
+
+```r
 liste <- list(c(1,2,3), 42.47, "Hej")
 liste
 ```
-```{r}
+
+```
+[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] 42.47
+
+[[3]]
+[1] "Hej"
+```
+
+```r
 liste[2]
+```
+
+```
+[[1]]
+[1] 42.47
 ```
 <!--
 Bemærk det der [[1]]. 
@@ -146,37 +200,86 @@ Bemærk det der [[1]].
 Matrices
 =================
 Et to-dimensionelt, rektangulært datasæt.
-```{r}
+
+```r
 linie1 <- c(1, 2, 3, 4, 5, "d")
 matrice <- matrix(linie1, nrow=2, ncol=3,  byrow=TRUE)
 matrice
 ```
-```{r}
+
+```
+     [,1] [,2] [,3]
+[1,] "1"  "2"  "3" 
+[2,] "4"  "5"  "d" 
+```
+
+```r
 matrice[1,]
 ```
-```{r}
+
+```
+[1] "1" "2" "3"
+```
+
+```r
 matrice[,1]
 ```
-```{r}
+
+```
+[1] "1" "4"
+```
+
+```r
 matrice[2,1]
+```
+
+```
+[1] "4"
 ```
 
 Arrays
 ====================
 Basalt set matricer i flere end to dimensioner
-```{r}
+
+```r
 a <- array(c('a','b'),dim = c(3,3,2))
 print(a)
 ```
 
+```
+, , 1
+
+     [,1] [,2] [,3]
+[1,] "a"  "b"  "a" 
+[2,] "b"  "a"  "b" 
+[3,] "a"  "b"  "a" 
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,] "b"  "a"  "b" 
+[2,] "a"  "b"  "a" 
+[3,] "b"  "a"  "b" 
+```
+
 ***
 
-```{r}
+
+```r
 a[1,2,2]
 ```
 
-```{r}
+```
+[1] "a"
+```
+
+
+```r
 a[2,2,2]
+```
+
+```
+[1] "b"
 ```
 
 
@@ -191,11 +294,26 @@ Factors
 
 ***
 
-```{r}
+
+```r
 svar <- c('Nord', 'Nord', 'Samf', 'Frb', 'Nord')
 svar_faktor <- factor(svar)
 print(svar_faktor)
+```
+
+```
+[1] Nord Nord Samf Frb  Nord
+Levels: Frb Nord Samf
+```
+
+```r
 table(svar_faktor)
+```
+
+```
+svar_faktor
+ Frb Nord Samf 
+   1    3    1 
 ```
 
 <!---
@@ -210,7 +328,8 @@ Teknisk en liste af vektorer med samme længde
 
 MEGET brugt
 
-```{r}
+
+```r
 navn <- c('Mazda', 'Datsun', 'Mercedes')
 heste <- c(110, 93, 95)
 gear <- c(4, 4, 4)
@@ -219,12 +338,42 @@ biler <- data.frame(navn, heste, gear)
 print(biler)
 ```
 
+```
+      navn heste gear
+1    Mazda   110    4
+2   Datsun    93    4
+3 Mercedes    95    4
+```
+
 ***
 
-```{r}
+
+```r
 biler$heste
+```
+
+```
+[1] 110  93  95
+```
+
+```r
 biler$navn[1]
+```
+
+```
+[1] Mazda
+Levels: Datsun Mazda Mercedes
+```
+
+```r
 biler[2]
+```
+
+```
+  heste
+1   110
+2    93
+3    95
 ```
 
 
@@ -239,22 +388,74 @@ Operatorer
 ***
 
 - De virker stort set alle på vektorer:
-```{r}
+
+```r
 a <- c(1,2,3,4)
 a+2
+```
+
+```
+[1] 3 4 5 6
+```
+
+```r
 a/2
+```
+
+```
+[1] 0.5 1.0 1.5 2.0
+```
+
+```r
 a*2
+```
+
+```
+[1] 2 4 6 8
+```
+
+```r
 a==2
+```
+
+```
+[1] FALSE  TRUE FALSE FALSE
 ```
 
 Flere operatorer
 =====================
 
-```{r}
+
+```r
 1 < 2
+```
+
+```
+[1] TRUE
+```
+
+```r
 1 > 2
+```
+
+```
+[1] FALSE
+```
+
+```r
 1 %in% c(1,2,3,4)
+```
+
+```
+[1] TRUE
+```
+
+```r
 5 %in% c(1,2,3,4)
+```
+
+```
+[1] FALSE
 ```
 
 
@@ -271,9 +472,21 @@ Funktioner
 
 *** 
 
-```{r}
+
+```r
 max(biler$heste)
+```
+
+```
+[1] 110
+```
+
+```r
 mean(biler$heste)
+```
+
+```
+[1] 99.33333
 ```
 
 
@@ -281,7 +494,8 @@ Din egen funktion
 ===============================
 
 Man kan lave sine egne:
-```{r}
+
+```r
 minfunktion <- function(a){
   resultat <- a*6
   return(resultat)
@@ -290,10 +504,21 @@ minfunktion <- function(a){
 
 ***
 
-```{r}
-minfunktion(7)
 
+```r
+minfunktion(7)
+```
+
+```
+[1] 42
+```
+
+```r
 minfunktion(7)+5
+```
+
+```
+[1] 47
 ```
 
 
@@ -307,16 +532,35 @@ Løkker og strukturer
 "for" løkken.
 for hvert element "i" i en eller anden sekvens gør følgende
 
-```{r}
+
+```r
 1:10
+```
+
+```
+ [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 
 ***
-```{r}
+
+```r
 for(i in 1:10){
   print(i)
 }
+```
+
+```
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
 ```
 
 
@@ -328,12 +572,26 @@ Den nysgerrige studerende kan selv skrive ?break og ?next i konsollen. De er nyt
 
 ***
 
-```{r}
+
+```r
 i <- 0
 while(i < 10){
   print(i)
   i <- i + 1
 }
+```
+
+```
+[1] 0
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
 ```
 
 
@@ -353,7 +611,8 @@ Den slags distribueres i biblioteker. Dem kan man installere, indlæse og bruge.
 
 ***
 
-```{r, eval=FALSE}
+
+```r
 install.packages("dplyr")
 library(xlsx)
 ```
@@ -367,8 +626,19 @@ Visualisering
 
 R er født med nogle datasæt man kan lege med:
 
-```{r}
+
+```r
 head(mtcars)
+```
+
+```
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 
@@ -412,18 +682,20 @@ Og beder om punkter
 
 ***
 
-```{r}
+
+```r
 plot(mtcars$mpg, mtcars$hp, type="p")
 ```
 
+![plot of chunk unnamed-chunk-26](R-kursus-figure/unnamed-chunk-26-1.png)
+
 Man kan meget mere
 ==================================
-```{r, eval=FALSE}
+
+```r
 plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", ylab="Heste")
 ```
 
 ***
 
-```{r, echo=FALSE}
-plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", ylab="Heste")
-```
+![plot of chunk unnamed-chunk-28](R-kursus-figure/unnamed-chunk-28-1.png)
