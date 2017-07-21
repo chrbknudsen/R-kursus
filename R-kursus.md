@@ -221,6 +221,9 @@ matrice[1,]
 [1] "1" "2" "3"
 ```
 
+***
+
+
 ```r
 matrice[,1]
 ```
@@ -239,7 +242,7 @@ matrice[2,1]
 
 Arrays
 ====================
-Basalt set matricer i flere end to dimensioner
+Matricer i flere end 2 dimensioner
 
 ```r
 a <- array(c('a','b'),dim = c(3,3,2))
@@ -285,10 +288,10 @@ a[2,2,2]
 
 Factors
 =======================
-- Håndterer kategoriske variable. 
-- Variable der kan have et begrænset antal værdier.
--Ofte kvalitative.
-- Eksempel: Bibliotekets brugerundersøgelse spørger til foretrukkent fysisk bibliotek
+- Kategoriske variable
+- Variable der kan have et begrænset antal værdier
+- Ofte kvalitative
+- Eksempel: Hvad er dit foretrukne fysiske bibliotek?
 - Svarmuligheder: KUB-Nord, KUB-Frederiksberg, KUB-Samf (kun det første svar er rigtigt)
 - Mange statistiske metoder "ved" hvordan kategoriske variable skal behandles. Men kun hvis de "ved" at det er kategoriske variable.
 
@@ -324,7 +327,7 @@ for de levels. Det fylder mindre.
 
 Data Frames
 ====================
-Teknisk en liste af vektorer med samme længde
+En liste af vektorer af samme længde
 
 MEGET brugt
 
@@ -467,8 +470,8 @@ Funktioner
 
 - Altid på formen: funktionsnavn(input) - og giver noget output.
 
-- I tvivl? ?funktionsnavn
-- Panisk? ??funktionsnavn
+- I tvivl?:  ?funktionsnavn
+- Panisk?:  ??funktionsnavn
 
 *** 
 
@@ -595,11 +598,55 @@ while(i < 10){
 ```
 
 
+Logiske strukturer
+===============
+Når vi skal gøre noget, men kun hvis en bestemt betingelse er opfyldt.
+
+if(dette udtryk er sandt){gør det her}
+
+
+```r
+for(i in 1:10){
+  if(i==2){
+    print(paste(i, ' er lig 2'))
+  }
+  else{
+    print(paste(i, ' er ikke lig 2'))
+  }
+  i<- i +1
+}
+```
+
+***
+
+
+```
+[1] "1  er ikke lig 2"
+[1] "2  er lig 2"
+[1] "3  er ikke lig 2"
+[1] "4  er ikke lig 2"
+[1] "5  er ikke lig 2"
+[1] "6  er ikke lig 2"
+[1] "7  er ikke lig 2"
+[1] "8  er ikke lig 2"
+[1] "9  er ikke lig 2"
+[1] "10  er ikke lig 2"
+```
+
+
 Biblioteker
 ==========================
 Man kan skrive sine egne funktioner. Man kan også kopiere andres.
 
 Den slags distribueres i biblioteker. Dem kan man installere, indlæse og bruge.
+
+
+```r
+install.packages("dplyr")
+library(xlsx)
+```
+
+***
 
 - dplyr: subsetting og sammenhæftning af datasæt. Og meget andet
 - tidyr: ændrer layoot af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
@@ -609,20 +656,11 @@ Den slags distribueres i biblioteker. Dem kan man installere, indlæse og bruge.
 
 - og mange andre. Flere tusinde!
 
-***
-
-
-```r
-install.packages("dplyr")
-library(xlsx)
-```
-
 
 
 Visualisering
 ============================
-- Det var alt det kedelige
-- Der er nødvendigt for at lave interessante ting
+- Nu til det spændende
 
 R er født med nogle datasæt man kan lege med:
 
@@ -660,9 +698,6 @@ Hvad var det?
 - Hvor mange gear de har (udover bakgear)
 - Antal karburatorer
 
-Alt sådan noget som min mand finder meget interessant, og som jeg er ligeglad med.
-
-Men det er data, og vi kan visualisere det!
 
 Plot
 =======================
@@ -687,7 +722,7 @@ Og beder om punkter
 plot(mtcars$mpg, mtcars$hp, type="p")
 ```
 
-![plot of chunk unnamed-chunk-26](R-kursus-figure/unnamed-chunk-26-1.png)
+![plot of chunk unnamed-chunk-28](R-kursus-figure/unnamed-chunk-28-1.png)
 
 Man kan meget mere
 ==================================
@@ -698,4 +733,16 @@ plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", y
 
 ***
 
-![plot of chunk unnamed-chunk-28](R-kursus-figure/unnamed-chunk-28-1.png)
+![plot of chunk unnamed-chunk-30](R-kursus-figure/unnamed-chunk-30-1.png)
+
+
+Videre?
+================================
+
+- Et hav af online tutorials, kurser etc på nettet
+- Kom forbi os
+- Øvelse-øvelse-øvelse
+- kub.kb.dk/datalab
+- cbk@kb.dk
+- datalab-nord@kb.dk
+
