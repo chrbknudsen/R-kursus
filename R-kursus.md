@@ -36,9 +36,11 @@ Kontakt os på datalab-nord@kb.dk.
 
 Hvad er R?
 ==================
-Open source programmeringssprog designet til statistiske beregninger og datavisualiseringer.
+Open source programmeringssprog, designet til statistiske beregninger og datavisualiseringer.
 
 Kommandoliniebaseret - med mulighed for grafiske brugerflader
+
+Graflommeregner på steroider.
 
 ***
 
@@ -65,8 +67,26 @@ Svaret er: 4
 Man kan gemme scripts, så man ikke skal taste det hele ind hver gang. 
 -->
 
+Meget avanceret lommeregner
+===================================
+
+
+```r
+1 + 1 
+```
+
+```
+[1] 2
+```
+
+
 Variable
 ===================================
+
+R er baseret på et gammelt sprog. Så vi bruger <- i stedet for =.
+
+Man kan bruge =. Lad være med det.
+
 
 ```r
 a <- 2
@@ -81,6 +101,8 @@ a + b
 
 Datatyper
 ========================================================
+Hvilke typer af variable kan vi så have?
+
 - Logical
 - Numeric
 - Integer
@@ -89,6 +111,8 @@ Datatyper
 - Raw
 
 ***
+
+
 
 - TRUE/FALSE
 - Tal: 3,141
@@ -101,6 +125,7 @@ Datatyper
 
 Objekter
 ========================================================
+Vi arbejder med data => Så vi har ikke kun et tal => behov for at samle disse tal.
 - Vectors
 - Lists
 - Matrices
@@ -131,6 +156,8 @@ print(æble)
 [1] "rød"
 ```
 
+c() er en funktion, der kombinerer værdier til en vektor, eller en liste (den vender vi tilbage til)
+
 Vektorer 2
 =========================
 Mange funktioner (det ser vi på senere), håndterer vektorer rigtig godt!
@@ -155,14 +182,13 @@ b
 ```
 
 ```r
-c <- a + a[2]
-c
+(c <- a + a[2])
 ```
 
 ```
 [1] 3 4 5 6
 ```
-
+Når udtrykket sættes i parantes - så bliver det ikke kun evalueret, resultatet bliver også skrevet ud!
 
 Lister
 =================
@@ -192,9 +218,12 @@ liste[2]
 [[1]]
 [1] 42.47
 ```
-<!--
-Bemærk det der [[1]]. 
--->
+
+Det har så den konsekvens, at det her giver en fejl:
+
+liste + 2
+
+
 
 
 Matrices
@@ -239,6 +268,10 @@ matrice[2,1]
 ```
 [1] "4"
 ```
+
+Bemærk notationen [1,] og [,1].
+
+Først række, så kolonne.
 
 Arrays
 ====================
@@ -390,7 +423,7 @@ Operatorer
 
 ***
 
-- De virker stort set alle på vektorer:
+- De virker alle på vektorer:
 
 ```r
 a <- c(1,2,3,4)
@@ -657,6 +690,22 @@ library(xlsx)
 - og mange andre. Flere tusinde!
 
 
+Det var basis - hvad med mine egne data?
+==============================
+Excel
+
+
+```r
+library(readxl)
+data <- read_excel("c:\mineregneark\arket.xls")
+```
+
+CSV
+
+```r
+data <- read.xls("filen.csv")
+```
+
 
 Visualisering
 ============================
@@ -722,7 +771,7 @@ Og beder om punkter
 plot(mtcars$mpg, mtcars$hp, type="p")
 ```
 
-![plot of chunk unnamed-chunk-28](R-kursus-figure/unnamed-chunk-28-1.png)
+![plot of chunk unnamed-chunk-31](R-kursus-figure/unnamed-chunk-31-1.png)
 
 Man kan meget mere
 ==================================
@@ -733,7 +782,7 @@ plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", y
 
 ***
 
-![plot of chunk unnamed-chunk-30](R-kursus-figure/unnamed-chunk-30-1.png)
+![plot of chunk unnamed-chunk-33](R-kursus-figure/unnamed-chunk-33-1.png)
 
 
 Videre?
