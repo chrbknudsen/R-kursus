@@ -1,7 +1,7 @@
 R-kursus - introduktion
 ========================================================
 author: Christian Knudsen
-date: 
+date: 23. november 2017
 autosize: true
 
 En introduktion til R
