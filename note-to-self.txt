@@ -1,5 +1,7 @@
 Bare fordi jeg ikke kan huske det fra gang til gang
 
+gør det fra shell i Rstudio
+
 git remote add origin https://github.com/chrbknudsen/R-kursus.git
 git config remote.origin.url git@github.com:chrbknudsen/R-kursus.git
 git pull origin master
