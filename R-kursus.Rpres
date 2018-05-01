@@ -110,6 +110,7 @@ Hvilke typer af variable kan vi så have?
 - Komplekse tal: 3 + 2i
 - Tekst: "Hej verden!"
 - Raw: Rå bytes
+- NA: Ingenting er vigtigt!
 
 
 
@@ -138,7 +139,7 @@ c() er en funktion, der kombinerer værdier til en vektor, eller en liste (den v
 
 Vektorer 2
 =========================
-Mange funktioner (det ser vi på senere), håndterer vektorer rigtig godt!
+Mange funktioner er vektoriserede.
 
 ```{r}
 a <- c(1,2,3,4)
@@ -153,10 +154,8 @@ Lister
 =================
 Et objekt der kan indeholde elementer af forskellig type
 ```{r}
-liste <- list(c(1,2,3), 42.47, "Hej")
-liste
-```
-```{r}
+(liste <- list(c(1,2,3), 42.47, "Hej"))
+
 liste[2]
 ```
 
@@ -196,8 +195,7 @@ Arrays
 ====================
 Matricer i flere end 2 dimensioner
 ```{r}
-a <- array(c('a','b'),dim = c(3,3,2))
-print(a)
+(a <- array(c('a','b'),dim = c(3,3,2)))
 ```
 
 ***
@@ -415,7 +413,7 @@ library(xlsx)
 ***
 
 - dplyr: subsetting og sammenhæftning af datasæt. Og meget andet
-- tidyr: ændrer layoot af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
+- tidyr: ændrer layout af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
 - stringr: kraftfulde værktøjer til manipulation af tekst
 - lubridate: håndtering af datoer og tid
 - xlsx: gør det let at importere Excel filer
@@ -501,6 +499,43 @@ plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", y
 ```{r, echo=FALSE}
 plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", ylab="Heste")
 ```
+
+
+Hvad mere?
+================================
+Lad os lægge programmeringen til side, og se på praktiske ting.
+
+Recoding. Vi er kommet til at skrive 999 alle de steder hvor vi mangler data. Vi ville godt have en anden værdi.
+
+dplyr. recode()
+
+```{r, echo=FALSE}
+library(dplyr)
+t1 <- sample(c(1:10,999),10)
+t2 <- sample(c(1:10,999),10)
+t3 <- sample(c(1:10,999),10)
+t4 <- sample(c(1:10,999),10)
+df <- data.frame(t1=t1, t2=t2, t3=t3, t4=t4)
+
+```
+
+***
+```{r}
+df
+```
+
+recode 2
+=======================
+```{r}
+recode(df$t1, "999"=20)
+```
+
+***
+Men data manglede! Der skulle nok stå NA:
+```{r}
+na_if(df, 999)
+```
+
 
 
 Videre?

@@ -1,7 +1,7 @@
 R-kursus - introduktion
 ========================================================
 author: Christian Knudsen
-date: 23. november 2017
+date: 
 autosize: true
 
 En introduktion til R
@@ -120,6 +120,7 @@ Hvilke typer af variable kan vi så have?
 - Komplekse tal: 3 + 2i
 - Tekst: "Hej verden!"
 - Raw: Rå bytes
+- NA: Ingenting er vigtigt!
 
 
 
@@ -160,7 +161,7 @@ c() er en funktion, der kombinerer værdier til en vektor, eller en liste (den v
 
 Vektorer 2
 =========================
-Mange funktioner (det ser vi på senere), håndterer vektorer rigtig godt!
+Mange funktioner er vektoriserede.
 
 
 ```r
@@ -195,8 +196,7 @@ Lister
 Et objekt der kan indeholde elementer af forskellig type
 
 ```r
-liste <- list(c(1,2,3), 42.47, "Hej")
-liste
+(liste <- list(c(1,2,3), 42.47, "Hej"))
 ```
 
 ```
@@ -278,8 +278,7 @@ Arrays
 Matricer i flere end 2 dimensioner
 
 ```r
-a <- array(c('a','b'),dim = c(3,3,2))
-print(a)
+(a <- array(c('a','b'),dim = c(3,3,2)))
 ```
 
 ```
@@ -682,7 +681,7 @@ library(xlsx)
 ***
 
 - dplyr: subsetting og sammenhæftning af datasæt. Og meget andet
-- tidyr: ændrer layoot af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
+- tidyr: ændrer layout af datasæt til "tidy" formatet, der spiller rigtigt godt sammen med andre pakker
 - stringr: kraftfulde værktøjer til manipulation af tekst
 - lubridate: håndtering af datoer og tid
 - xlsx: gør det let at importere Excel filer
@@ -771,7 +770,7 @@ Og beder om punkter
 plot(mtcars$mpg, mtcars$hp, type="p")
 ```
 
-![plot of chunk unnamed-chunk-31](R-kursus-figure/unnamed-chunk-31-1.png)
+![plot of chunk unnamed-chunk-30](R-kursus-figure/unnamed-chunk-30-1.png)
 
 Man kan meget mere
 ==================================
@@ -782,7 +781,71 @@ plot(mtcars$mpg, mtcars$hp, type="p", main="Mit andet plot!", xlab="Økonomi", y
 
 ***
 
-![plot of chunk unnamed-chunk-33](R-kursus-figure/unnamed-chunk-33-1.png)
+![plot of chunk unnamed-chunk-32](R-kursus-figure/unnamed-chunk-32-1.png)
+
+
+Hvad mere?
+================================
+Lad os lægge programmeringen til side, og se på praktiske ting.
+
+Recoding. Vi er kommet til at skrive 999 alle de steder hvor vi mangler data. Vi ville godt have en anden værdi.
+
+dplyr. recode()
+
+
+
+***
+
+```r
+df
+```
+
+```
+    t1  t2  t3  t4
+1    5   4   1   5
+2  999 999   2   4
+3    3   6   6   9
+4    6   2  10   3
+5    4   5   5 999
+6    2   8 999   7
+7   10   3   8   2
+8    9   7   4  10
+9    7   1   3   8
+10   8  10   7   1
+```
+
+recode 2
+=======================
+
+```r
+recode(df$t1, "999"=20)
+```
+
+```
+ [1]  5 20  3  6  4  2 10  9  7  8
+```
+
+***
+Men data manglede! Der skulle nok stå NA:
+
+```r
+na_if(df, 999)
+```
+
+```
+   t1 t2 t3 t4
+1   5  4  1  5
+2  NA NA  2  4
+3   3  6  6  9
+4   6  2 10  3
+5   4  5  5 NA
+6   2  8 NA  7
+7  10  3  8  2
+8   9  7  4 10
+9   7  1  3  8
+10  8 10  7  1
+```
+
 
 
 Videre?
