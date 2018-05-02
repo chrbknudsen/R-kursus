@@ -536,6 +536,51 @@ Men data manglede! Der skulle nok stå NA:
 na_if(df, 999)
 ```
 
+Tilføje kolonner til en dataframe
+================================
+
+Relativt enkelt. Lad os tilføje en kolonne til vores dataframe fra før:
+```{r}
+df$nykolonne <- 42
+```
+
+og se på den:
+```{r}
+head(df)
+```
+
+Hvad hvis vi vil beregne en ny kolonne?
+==========================
+dplyr hjælper!
+```{r}
+mutate(df, nyere=t1+t2)
+```
+***
+Men!
+```{r}
+head(df)
+```
+
+Eller hvis vi er ligeglade med de gamle?
+=======================
+dplyr igen:
+```{r}
+transmute(df, nyere=t1+t2)
+```
+
+
+Mere avancerede plots
+======================
+Plot er fin. Men ser ikke så fin ud.
+
+
+```{r}
+library(ggplot2)
+
+ggplot(mtcars) +
+  geom_point(aes(x=hp, y=disp))
+```
+
 
 
 Videre?

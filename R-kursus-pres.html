@@ -1658,17 +1658,17 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 <pre><code class="r">df
 </code></pre>
 
-<pre><code>    t1  t2  t3  t4
-1    5   4   1   5
-2  999 999   2   4
-3    3   6   6   9
-4    6   2  10   3
-5    4   5   5 999
-6    2   8 999   7
-7   10   3   8   2
-8    9   7   4  10
-9    7   1   3   8
-10   8  10   7   1
+<pre><code>    t1  t2 t3  t4
+1    3  10  8   3
+2    2   8  7   9
+3    5   2  3   1
+4   10 999 10   8
+5  999   4  5 999
+6    7   7  4   2
+7    4   1  1   5
+8    6   3  9   4
+9    1   5  2  10
+10   8   9  6   6
 </code></pre>
 
 </div>
@@ -1680,7 +1680,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 <pre><code class="r">recode(df$t1, &quot;999&quot;=20)
 </code></pre>
 
-<pre><code> [1]  5 20  3  6  4  2 10  9  7  8
+<pre><code> [1]  3  2  5 10 20  7  4  6  1  8
 </code></pre>
 
 
@@ -1695,17 +1695,126 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 </code></pre>
 
 <pre><code>   t1 t2 t3 t4
-1   5  4  1  5
-2  NA NA  2  4
-3   3  6  6  9
-4   6  2 10  3
-5   4  5  5 NA
-6   2  8 NA  7
-7  10  3  8  2
-8   9  7  4 10
-9   7  1  3  8
-10  8 10  7  1
+1   3 10  8  3
+2   2  8  7  9
+3   5  2  3  1
+4  10 NA 10  8
+5  NA  4  5 NA
+6   7  7  4  2
+7   4  1  1  5
+8   6  3  9  4
+9   1  5  2 10
+10  8  9  6  6
 </code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Tilføje kolonner til en dataframe</h3>
+<div class="slideContent" >
+<p>Relativt enkelt. Lad os tilføje en kolonne til vores dataframe fra før:</p>
+
+<pre><code class="r">df$nykolonne &lt;- 42
+</code></pre>
+
+<p>og se på den:</p>
+
+<pre><code class="r">head(df)
+</code></pre>
+
+<pre><code>   t1  t2 t3  t4 nykolonne
+1   3  10  8   3        42
+2   2   8  7   9        42
+3   5   2  3   1        42
+4  10 999 10   8        42
+5 999   4  5 999        42
+6   7   7  4   2        42
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Hvad hvis vi vil beregne en ny kolonne?</h3>
+<div class="column column1 slideContent" >
+<p>dplyr hjælper!</p>
+
+<pre><code class="r">mutate(df, nyere=t1+t2)
+</code></pre>
+
+<pre><code>    t1  t2 t3  t4 nykolonne nyere
+1    3  10  8   3        42    13
+2    2   8  7   9        42    10
+3    5   2  3   1        42     7
+4   10 999 10   8        42  1009
+5  999   4  5 999        42  1003
+6    7   7  4   2        42    14
+7    4   1  1   5        42     5
+8    6   3  9   4        42     9
+9    1   5  2  10        42     6
+10   8   9  6   6        42    17
+</code></pre>
+
+
+</div>
+
+<div class="column column2 slideContent" >
+
+
+<p>Men!</p>
+
+<pre><code class="r">head(df)
+</code></pre>
+
+<pre><code>   t1  t2 t3  t4 nykolonne
+1   3  10  8   3        42
+2   2   8  7   9        42
+3   5   2  3   1        42
+4  10 999 10   8        42
+5 999   4  5 999        42
+6   7   7  4   2        42
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Eller hvis vi er ligeglade med de gamle?</h3>
+<div class="slideContent" >
+<p>dplyr igen:</p>
+
+<pre><code class="r">transmute(df, nyere=t1+t2)
+</code></pre>
+
+<pre><code>   nyere
+1     13
+2     10
+3      7
+4   1009
+5   1003
+6     14
+7      5
+8      9
+9      6
+10    17
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Mere avancerede plots</h3>
+<div class="mediaInline slideContent" >
+<p>Plot er fin. Men ser ikke så fin ud.</p>
+
+<pre><code class="r">library(ggplot2)
+
+ggplot(mtcars) +
+  geom_point(aes(x=hp, y=disp))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-42"/></p>
 
 </div>
 

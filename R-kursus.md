@@ -801,17 +801,17 @@ df
 ```
 
 ```
-    t1  t2  t3  t4
-1    5   4   1   5
-2  999 999   2   4
-3    3   6   6   9
-4    6   2  10   3
-5    4   5   5 999
-6    2   8 999   7
-7   10   3   8   2
-8    9   7   4  10
-9    7   1   3   8
-10   8  10   7   1
+    t1  t2 t3  t4
+1    3  10  8   3
+2    2   8  7   9
+3    5   2  3   1
+4   10 999 10   8
+5  999   4  5 999
+6    7   7  4   2
+7    4   1  1   5
+8    6   3  9   4
+9    1   5  2  10
+10   8   9  6   6
 ```
 
 recode 2
@@ -822,7 +822,7 @@ recode(df$t1, "999"=20)
 ```
 
 ```
- [1]  5 20  3  6  4  2 10  9  7  8
+ [1]  3  2  5 10 20  7  4  6  1  8
 ```
 
 ***
@@ -834,17 +834,118 @@ na_if(df, 999)
 
 ```
    t1 t2 t3 t4
-1   5  4  1  5
-2  NA NA  2  4
-3   3  6  6  9
-4   6  2 10  3
-5   4  5  5 NA
-6   2  8 NA  7
-7  10  3  8  2
-8   9  7  4 10
-9   7  1  3  8
-10  8 10  7  1
+1   3 10  8  3
+2   2  8  7  9
+3   5  2  3  1
+4  10 NA 10  8
+5  NA  4  5 NA
+6   7  7  4  2
+7   4  1  1  5
+8   6  3  9  4
+9   1  5  2 10
+10  8  9  6  6
 ```
+
+Tilføje kolonner til en dataframe
+================================
+
+Relativt enkelt. Lad os tilføje en kolonne til vores dataframe fra før:
+
+```r
+df$nykolonne <- 42
+```
+
+og se på den:
+
+```r
+head(df)
+```
+
+```
+   t1  t2 t3  t4 nykolonne
+1   3  10  8   3        42
+2   2   8  7   9        42
+3   5   2  3   1        42
+4  10 999 10   8        42
+5 999   4  5 999        42
+6   7   7  4   2        42
+```
+
+Hvad hvis vi vil beregne en ny kolonne?
+==========================
+dplyr hjælper!
+
+```r
+mutate(df, nyere=t1+t2)
+```
+
+```
+    t1  t2 t3  t4 nykolonne nyere
+1    3  10  8   3        42    13
+2    2   8  7   9        42    10
+3    5   2  3   1        42     7
+4   10 999 10   8        42  1009
+5  999   4  5 999        42  1003
+6    7   7  4   2        42    14
+7    4   1  1   5        42     5
+8    6   3  9   4        42     9
+9    1   5  2  10        42     6
+10   8   9  6   6        42    17
+```
+***
+Men!
+
+```r
+head(df)
+```
+
+```
+   t1  t2 t3  t4 nykolonne
+1   3  10  8   3        42
+2   2   8  7   9        42
+3   5   2  3   1        42
+4  10 999 10   8        42
+5 999   4  5 999        42
+6   7   7  4   2        42
+```
+
+Eller hvis vi er ligeglade med de gamle?
+=======================
+dplyr igen:
+
+```r
+transmute(df, nyere=t1+t2)
+```
+
+```
+   nyere
+1     13
+2     10
+3      7
+4   1009
+5   1003
+6     14
+7      5
+8      9
+9      6
+10    17
+```
+
+
+Mere avancerede plots
+======================
+Plot er fin. Men ser ikke så fin ud.
+
+
+
+```r
+library(ggplot2)
+
+ggplot(mtcars) +
+  geom_point(aes(x=hp, y=disp))
+```
+
+![plot of chunk unnamed-chunk-42](R-kursus-figure/unnamed-chunk-42-1.png)
 
 
 
